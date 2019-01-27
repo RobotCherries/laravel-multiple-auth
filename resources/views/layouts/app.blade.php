@@ -41,11 +41,29 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                            {{-- Login dropdown --}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Logare
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('login') }}">{{ __('Lucrător') }}</a>
+                                    <a class="dropdown-item" href="{{ route('manager_login') }}">{{ __('Manager') }}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('admin_login') }}">{{ __('Admin') }}</a>
+                                </div>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            {{-- Register dropdown --}}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Creare cont
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('register') }}">{{ __('Lucrător') }}</a>
+                                    <a class="dropdown-item" href="{{ route('manager_register') }}">{{ __('Manager') }}</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="{{ route('admin_register') }}">{{ __('Admin') }}</a>
+                                </div>
                             </li>
                         @else
                             <li class="nav-item dropdown">

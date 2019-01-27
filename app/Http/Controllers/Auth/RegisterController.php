@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use App\Admin;
-use App\Writer;
+use App\Manager;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -41,7 +41,7 @@ class RegisterController extends Controller
     {
         $this->middleware('guest');
         $this->middleware('guest:admin');
-        $this->middleware('guest:writer');
+        $this->middleware('guest:manager');
     }
 
     /**
@@ -64,9 +64,9 @@ class RegisterController extends Controller
         return view('auth.register', ['url' => 'admin']);
     }
 
-    public function showWriterRegisterForm()
+    public function showManagerRegisterForm()
     {
-        return view('auth.register', ['url' => 'writer']);
+        return view('auth.register', ['url' => 'manager']);
     }
 
     protected function create(array $data)
@@ -89,14 +89,14 @@ class RegisterController extends Controller
         return redirect()->intended('login/admin');
     }
 
-    protected function createWriter(Request $request)
+    protected function createManager(Request $request)
     {
         $this->validator($request->all())->validate();
-        $writer = Writer::create([
+        $manager = Manager::create([
             'name' => $request['name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
         ]);
-        return redirect()->intended('login/writer');
+        return redirect()->intended('login/manager');
     }
 }

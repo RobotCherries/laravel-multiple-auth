@@ -51,9 +51,9 @@ return [
             'provider' => 'admins',
         ],
         
-        'writer' => [
+        'manager' => [
             'driver' => 'session',
-            'provider' => 'writers',
+            'provider' => 'managers',
         ],
     ],
 
@@ -85,9 +85,9 @@ return [
             'model' => App\Admin::class,
         ],
 
-        'writers' => [
+        'managers' => [
             'driver' => 'eloquent',
-            'model' => App\Writer::class,
+            'model' => App\Manager::class,
         ],
 
         // 'users' => [
@@ -124,8 +124,8 @@ return [
             'expire' => 60,
         ],
         
-        'writers' => [
-            'provider' => 'writers',
+        'managers' => [
+            'provider' => 'managers',
             'table' => 'password_resets',
             'expire' => 60,
         ],

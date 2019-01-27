@@ -8,10 +8,9 @@
                 <div class="card-header">Dashboard</div>
 
                 <div class="card-body">
-                    Hi there, awesome writer
+                    Hi there, awesome manager
                 </div>
             </div>
         </div>
     </div>
 </div>
-@endsection

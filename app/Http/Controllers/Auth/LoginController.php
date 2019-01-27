@@ -38,7 +38,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
-        $this->middleware('guest:writer')->except('logout');
+        $this->middleware('guest:manager')->except('logout');
     }
 
     public function showAdminLoginForm()
@@ -46,6 +46,7 @@ class LoginController extends Controller
         return view('auth.login', ['url' => 'admin']);
     }
 
+    // Admin
     public function adminLogin(Request $request)
     {
         $this->validate($request, [
@@ -60,21 +61,22 @@ class LoginController extends Controller
         return back()->withInput($request->only('email', 'remember'));
     }
 
-    public function showWriterLoginForm()
+    // Manager
+    public function showManagerLoginForm()
     {
-        return view('auth.login', ['url' => 'writer']);
+        return view('auth.login', ['url' => 'manager']);
     }
 
-    public function writerLogin(Request $request)
+    public function managerLogin(Request $request)
     {
         $this->validate($request, [
             'email'   => 'required|email',
             'password' => 'required|min:6'
         ]);
 
-        if (Auth::guard('writer')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
+        if (Auth::guard('manager')->attempt(['email' => $request->email, 'password' => $request->password], $request->get('remember'))) {
 
-            return redirect()->intended('/writer');
+            return redirect()->intended('/manager');
         }
         return back()->withInput($request->only('email', 'remember'));
     }

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateWritersTable extends Migration
+class CreateManagersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateWritersTable extends Migration
      */
     public function up()
     {
-        Schema::create('writers', function (Blueprint $table) {
+        Schema::create('managers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name', 64);
+            $table->string('email', 128)->unique();
             $table->string('password');
             $table->boolean('is_editor')->default(false);
             $table->rememberToken();
@@ -31,6 +31,6 @@ class CreateWritersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('writers');
+        Schema::dropIfExists('managers');
     }
 }
