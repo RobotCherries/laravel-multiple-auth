@@ -3,7 +3,10 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use App\Services\Auth\JwtGuard;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
+
 
 class RedirectIfAuthenticated
 {

@@ -9,10 +9,11 @@ class Manager extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'id_manager';
     protected $guard = 'manager';
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'middle_name', 'last_name', 'email', 'password',
     ];
 
     protected $hidden = [

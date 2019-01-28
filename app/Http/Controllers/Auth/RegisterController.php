@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
 use App\Admin;
 use App\Manager;
+use App\Worker;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -18,7 +18,7 @@ class RegisterController extends Controller
     | Register Controller
     |--------------------------------------------------------------------------
     |
-    | This controller handles the registration of new users as well as their
+    | This controller handles the registration of new workers as well as their
     | validation and creation. By default this controller uses a trait to
     | provide this functionality without requiring any additional code.
     |
@@ -26,7 +26,7 @@ class RegisterController extends Controller
 
     use RegistersUsers;
     /**
-     * Where to redirect users after registration.
+     * Where to redirect workers after registration.
      *
      * @var string
      */
@@ -53,8 +53,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'first_name' => 'required|string|max:64',
+            'middle_name' => 'nullable|string|max:64',
+            'last_name' => 'required|string|max:64',
+            'email' => 'required|string|email|max:128|unique:workers',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
@@ -71,31 +73,38 @@ class RegisterController extends Controller
 
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
+        return Worker::create([
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        return redirect()->intended('login');
     }
 
-    protected function createAdmin(Request $request)
+    protected function createAdmin(Request $data)
     {
-        $this->validator($request->all())->validate();
+        $this->validator($data->all())->validate();
         $admin = Admin::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
         return redirect()->intended('login/admin');
     }
 
-    protected function createManager(Request $request)
+    protected function createManager(Request $data)
     {
-        $this->validator($request->all())->validate();
+        $this->validator($data->all())->validate();
         $manager = Manager::create([
-            'name' => $request['name'],
-            'email' => $request['email'],
-            'password' => Hash::make($request['password']),
+            'first_name' => $data['first_name'],
+            'middle_name' => $data['middle_name'],
+            'last_name' => $data['last_name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
         ]);
         return redirect()->intended('login/manager');
     }

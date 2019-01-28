@@ -14,11 +14,12 @@ class CreateManagersTable extends Migration
     public function up()
     {
         Schema::create('managers', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name', 64);
+            $table->increments('id_manager');
+            $table->string('first_name', 64);
+            $table->string('middle_name', 64)->nullable();
+            $table->string('last_name', 64);
             $table->string('email', 128)->unique();
             $table->string('password');
-            $table->boolean('is_editor')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });
