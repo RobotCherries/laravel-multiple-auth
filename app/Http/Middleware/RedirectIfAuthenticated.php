@@ -19,7 +19,7 @@ class RedirectIfAuthenticated
             return redirect('/manager');
         }
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+            return redirect('/worker');
         }
 
         return $next($request);

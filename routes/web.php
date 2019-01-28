@@ -14,6 +14,6 @@ Route::post('/login/manager', 'Auth\LoginController@managerLogin')->name('manage
 Route::post('/register/admin', 'Auth\RegisterController@createAdmin')->name('admin_register');
 Route::post('/register/manager', 'Auth\RegisterController@createManager')->name('manager_register');
 
-Route::view('/home', 'home')->middleware('auth');
+Route::view('/worker', 'worker')->middleware('auth');
 Route::view('/admin', 'admin');
 Route::view('/manager', 'manager');
